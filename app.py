@@ -319,3 +319,23 @@ elif pagina_selecionada == "🎓 Informações Acadêmicas":
     
     *Destaca-se a implementação de uma arquitetura de estado global para permitir interações dinâmicas avançadas por meio de **Brushing & Linking**, onde a seleção em um gráfico cruza e filtra simultaneamente todo o contexto de dados do painel. Adicionalmente, o design foi rigorosamente pautado por diretrizes de **acessibilidade visual** — utilizando uma paleta de cores cromaticamente segura para daltônicos — e alinhado aos princípios de minimalismo analítico do **Data-Ink Ratio** de Edward Tufte, eliminando ruídos visuais para maximizar a eficiência e a precisão na comunicação da informação.*
     """)
+
+    st.divider()
+
+    # --- Nova Seção Destacada com o Link de Produção ---
+    st.subheader("🌐 Acesso ao Painel Publicado")
+    st.info("O ambiente de produção deste painel está hospedado e disponível para acesso público no Streamlit Community Cloud.")
+    
+    st.markdown(
+        """
+        <a href="https://dashboard-infovis.streamlit.app/" target="_blank" style="text-decoration: none;">
+            <div style="background-color: #0072B2; color: white; padding: 15px; border-radius: 8px; text-align: center; font-size: 18px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 10px; margin-bottom: 10px;">
+                🚀 Clique aqui para acessar o Painel Interativo Online
+            </div>
+        </a>
+        <p style="text-align: center; font-size: 15px; color: #555;">
+            <strong>Link direto:</strong> <a href="https://dashboard-infovis.streamlit.app/" target="_blank">https://dashboard-infovis.streamlit.app/</a>
+        </p>
+        """, 
+        unsafe_allow_html=True
+    )
