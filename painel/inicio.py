@@ -63,7 +63,7 @@ def render():
             if ARQUIVO_VIDEO.exists():
                 st.video(str(ARQUIVO_VIDEO))
             else:
-                st.info("Vídeo não encontrado. Gere-o com `python gerar_video.py`.")
+                st.info("Vídeo não encontrado. Gere-o com `python scripts/gerar_video.py`.")
         with col_texto:
             st.subheader("Os dados em 40 segundos")
             st.markdown(

@@ -1,6 +1,6 @@
 """Gera o vídeo ilustrativo da página inicial a partir de data/vendas.csv.
 
-Uso:  python gerar_video.py
+Uso:  python scripts/gerar_video.py
 Requer as dependências de requirements-dev.txt (matplotlib e imageio-ffmpeg).
 Saída: assets/video_ilustrativo.mp4 (1280×720, H.264, 24 fps).
 """
@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt  # noqa: E402
 import pandas as pd  # noqa: E402
 from matplotlib.animation import FFMpegWriter  # noqa: E402
 
-RAIZ = Path(__file__).resolve().parent
+RAIZ = Path(__file__).resolve().parent.parent
 SAIDA = RAIZ / "assets" / "video_ilustrativo.mp4"
 FPS = 24
 

@@ -1,3 +1,10 @@
+"""Gera a base simulada data/vendas.csv (24 meses × 27 UFs × 5 áreas).
+
+Uso:  python scripts/gerar_dados.py
+"""
+
+from pathlib import Path
+
 import pandas as pd
 import numpy as np
 
@@ -40,7 +47,7 @@ for data in datas:
             })
 
 df = pd.DataFrame(registros)
-df.to_csv("data/vendas.csv", index=False)
+df.to_csv(Path(__file__).resolve().parent.parent / "data" / "vendas.csv", index=False)
 
 print(df.head())
 print("Arquivo gerado: data/vendas.csv")

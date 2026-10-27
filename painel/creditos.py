@@ -28,7 +28,7 @@ def render():
 
     *Destaca-se a implementação de uma arquitetura de estado global para permitir interações dinâmicas avançadas por meio de **Brushing & Linking**, onde a seleção em um gráfico cruza e filtra simultaneamente todo o contexto de dados do painel. Adicionalmente, o design foi rigorosamente pautado por diretrizes de **acessibilidade visual** — utilizando uma paleta de cores cromaticamente segura para daltônicos — e alinhado aos princípios de minimalismo analítico do **Data-Ink Ratio** de Edward Tufte, eliminando ruídos visuais para maximizar a eficiência e a precisão na comunicação da informação.*
 
-    *A base de dados (`data/vendas.csv`) é simulada pelo script `gerar_dados.py` e não representa estatísticas oficiais.*
+    *A base de dados (`data/vendas.csv`) é simulada pelo script `scripts/gerar_dados.py` e não representa estatísticas oficiais.*
     """)
 
     st.divider()

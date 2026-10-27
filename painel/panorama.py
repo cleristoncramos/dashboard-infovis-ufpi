@@ -42,7 +42,7 @@ def indicadores(df, medida):
     c2.metric("Recursos aplicados", "R$ " + fmt_compacto(total_valor), delta=delta(mensal["valor"]),
               delta_description=descricao, chart_data=mensal["valor"].tolist(), chart_type="area",
               help=fmt_brl(total_valor))
-    c3.metric("Custo/atendimento", fmt_brl(ticket), delta=delta(ticket_mensal), delta_color="inverse",
+    c3.metric("Custo por atendimento", fmt_brl(ticket), delta=delta(ticket_mensal), delta_color="inverse",
               delta_description=descricao, chart_data=ticket_mensal.round(2).tolist(), chart_type="line",
               help="Recursos aplicados ÷ atendimentos (ticket médio)")
     c4.metric("Mês de pico", pico_txt, delta=pico_valor, delta_color="off", delta_arrow="off",
