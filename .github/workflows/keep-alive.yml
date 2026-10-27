@@ -1,0 +1,37 @@
+name: Keep-alive do painel
+
+# Visita o app publicado a cada 4 horas para que o Streamlit Community Cloud
+# não o coloque em hibernação por falta de acesso.
+on:
+  schedule:
+    - cron: "17 */4 * * *"
+  workflow_dispatch:
+
+jobs:
+  visitar-app:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar Playwright e Chromium
+        run: |
+          pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+
+      - name: Abrir o painel (e acordá-lo se estiver hibernando)
+        env:
+          APP_URL: https://dashboard-infovis.streamlit.app/
+        run: python scripts/keep_alive.py
+
+      - name: Guardar captura de tela em caso de falha
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: keep-alive-falha
+          path: keep_alive_falha.png
+          if-no-files-found: ignore
