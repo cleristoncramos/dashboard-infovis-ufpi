@@ -213,7 +213,7 @@ def cena_encerramento(fig, t):
     fig.text(0.5, 0.49, "Panorama Nacional  ·  Perfil por Estado  ·  Áreas de Atendimento", ha="center",
              fontsize=20, color=TINTA_2, alpha=a)
     fig.text(0.5, 0.36, "Clique em  Get started  →", ha="center", fontsize=24, color="white", alpha=a,
-             bbox=dict(boxstyle="round,pad=0.7", facecolor=PRIMARIA, edgecolor="none", alpha=a))
+             bbox=dict(boxstyle="square,pad=0.7", facecolor=PRIMARIA, edgecolor="none", alpha=a))
     rodape(fig)
 
 

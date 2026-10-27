@@ -254,25 +254,25 @@ def render():
                "sazonalidade, concentração geográfica e vocação regional.")
     barra_de_selecoes(("categorias",))
 
-    secao("Resumo por área" + (" · variação ignora o filtro de ano" if ano != "Todos" else ""))
-    cartoes_areas(base, base_todos_anos, medida)
+    with secao("Resumo por área" + (" · variação ignora o filtro de ano" if ano != "Todos" else "")):
+        cartoes_areas(base, base_todos_anos, medida)
 
-    secao("Tendência")
-    grafico_tendencias(base, medida)
+    with secao("Tendência"):
+        grafico_tendencias(base, medida)
 
-    secao("Custo e sazonalidade")
-    c1, c2 = st.columns(2, gap="large")
-    with c1:
-        grafico_custo(base)
-    with c2:
-        grafico_sazonalidade(base, medida)
+    with secao("Custo e sazonalidade"):
+        c1, c2 = st.columns(2, gap="large")
+        with c1:
+            grafico_custo(base)
+        with c2:
+            grafico_sazonalidade(base, medida)
 
-    secao("Distribuição territorial")
-    c1, c2 = st.columns(2, gap="large")
-    with c1:
-        grafico_concentracao(base, medida)
-    with c2:
-        grafico_vocacao(base, medida)
+    with secao("Distribuição territorial"):
+        c1, c2 = st.columns(2, gap="large")
+        with c1:
+            grafico_concentracao(base, medida)
+        with c2:
+            grafico_vocacao(base, medida)
 
-    secao("Detalhes sob demanda")
-    tabela_areas(base, medida)
+    with secao("Detalhes sob demanda"):
+        tabela_areas(base, medida)

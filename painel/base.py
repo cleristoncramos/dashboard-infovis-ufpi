@@ -2,6 +2,8 @@
 estado de seleção (Brushing & Linking), estilo dos gráficos e exportação."""
 
 import json
+import re
+import unicodedata
 from pathlib import Path
 
 import numpy as np
@@ -73,7 +75,7 @@ LAYOUT_TUFTE = dict(
     yaxis=dict(showgrid=True, gridcolor=GRADE, zeroline=False, showline=False, automargin=True),
     hoverlabel=dict(bgcolor="white", bordercolor=EIXO, font=dict(color=TINTA, size=13)),
     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0, title=None),
-    barcornerradius=4,
+    barcornerradius=0,
 )
 pio.templates["tufte"] = go.layout.Template(layout=LAYOUT_TUFTE)
 pio.templates.default = "tufte"
@@ -346,7 +348,11 @@ def cabecalho(titulo, insight=None):
 
 
 def secao(texto):
-    st.markdown(f"<div class='secao'>{texto}</div>", unsafe_allow_html=True)
+    """Bloco com borda fina que agrupa o título da seção e seu conteúdo (use com `with`)."""
+    chave = unicodedata.normalize("NFKD", texto.split(" · ")[0]).encode("ascii", "ignore").decode()
+    caixa = st.container(border=True, key="secao_" + re.sub(r"\W+", "_", chave.lower()).strip("_"))
+    caixa.markdown(f"<div class='secao'>{texto}</div>", unsafe_allow_html=True)
+    return caixa
 
 
 def sem_dados():

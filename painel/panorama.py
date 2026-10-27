@@ -434,40 +434,41 @@ def render():
     if df_contexto.empty:
         st.warning("Nenhum registro corresponde à combinação de filtros e seleções. Limpe alguma seleção.")
 
-    indicadores(df_contexto, medida)
+    with secao("Indicadores-chave"):
+        indicadores(df_contexto, medida)
 
-    secao("Evolução no tempo")
-    grafico_temporal(base, medida)
+    with secao("Evolução no tempo"):
+        grafico_temporal(base, medida)
 
-    secao("Distribuição geográfica")
-    col_mapa, col_rank = st.columns([3, 2], gap="large")
-    with col_mapa:
-        grafico_mapa(base, medida)
-    with col_rank:
-        grafico_ranking_estados(base, medida)
+    with secao("Distribuição geográfica"):
+        col_mapa, col_rank = st.columns([3, 2], gap="large")
+        with col_mapa:
+            grafico_mapa(base, medida)
+        with col_rank:
+            grafico_ranking_estados(base, medida)
 
-    secao("Áreas e regiões")
-    c1, c2, c3 = st.columns(3, gap="large")
-    with c1:
-        grafico_categorias(base, medida)
-    with c2:
-        grafico_ticket_categoria(base)
-    with c3:
-        grafico_regioes(base, medida)
+    with secao("Áreas e regiões"):
+        c1, c2, c3 = st.columns(3, gap="large")
+        with c1:
+            grafico_categorias(base, medida)
+        with c2:
+            grafico_ticket_categoria(base)
+        with c3:
+            grafico_regioes(base, medida)
 
-    secao("Volume, custo e sazonalidade")
-    c1, c2 = st.columns(2, gap="large")
-    with c1:
-        grafico_dispersao_estados(base)
-    with c2:
-        grafico_calor(base, medida)
+    with secao("Volume, custo e sazonalidade"):
+        c1, c2 = st.columns(2, gap="large")
+        with c1:
+            grafico_dispersao_estados(base)
+        with c2:
+            grafico_calor(base, medida)
 
-    secao("Comparativo anual" + (" · ignora o filtro de ano" if ano != "Todos" else ""))
-    c1, c2 = st.columns(2, gap="large")
-    with c1:
-        grafico_comparativo_anual(base_todos_anos, medida)
-    with c2:
-        grafico_variacao_estados(base_todos_anos, medida)
+    with secao("Comparativo anual" + (" · ignora o filtro de ano" if ano != "Todos" else "")):
+        c1, c2 = st.columns(2, gap="large")
+        with c1:
+            grafico_comparativo_anual(base_todos_anos, medida)
+        with c2:
+            grafico_variacao_estados(base_todos_anos, medida)
 
-    secao("Detalhes sob demanda")
-    tabela_detalhes(df_contexto)
+    with secao("Detalhes sob demanda"):
+        tabela_detalhes(df_contexto)

@@ -232,31 +232,32 @@ def render():
         st.warning("Sem registros para esta UF no recorte atual.")
         return
 
-    por_uf, posicao, ticket_uf, ticket_br, var_uf = indicadores(uf, nacional, nacional_anos, medida)
-    lider_area = nacional[nacional["estado"] == uf].groupby("categoria")[medida].sum().idxmax()
-    st.markdown(
-        f"<div class='resumo'><b>{NOME_UF[uf]}</b> é a <b>{posicao}ª</b> UF em {MEDIDAS[medida].lower()} "
-        f"no recorte, com maior peso em <b>{lider_area}</b>. O custo por atendimento é "
-        f"<b>{fmt_pct(abs(ticket_uf / ticket_br - 1) * 100)} {'acima' if ticket_uf > ticket_br else 'abaixo'}</b> "
-        f"da média nacional"
-        + (f" e a demanda variou <b>{fmt_pct(var_uf, sinal=True)}</b> no último ano." if var_uf is not None else ".")
-        + "</div>",
-        unsafe_allow_html=True,
-    )
+    with secao("Indicadores-chave"):
+        por_uf, posicao, ticket_uf, ticket_br, var_uf = indicadores(uf, nacional, nacional_anos, medida)
+        lider_area = nacional[nacional["estado"] == uf].groupby("categoria")[medida].sum().idxmax()
+        st.markdown(
+            f"<div class='resumo'><b>{NOME_UF[uf]}</b> é a <b>{posicao}ª</b> UF em {MEDIDAS[medida].lower()} "
+            f"no recorte, com maior peso em <b>{lider_area}</b>. O custo por atendimento é "
+            f"<b>{fmt_pct(abs(ticket_uf / ticket_br - 1) * 100)} {'acima' if ticket_uf > ticket_br else 'abaixo'}</b> "
+            f"da média nacional"
+            + (f" e a demanda variou <b>{fmt_pct(var_uf, sinal=True)}</b> no último ano." if var_uf is not None else ".")
+            + "</div>",
+            unsafe_allow_html=True,
+        )
 
-    secao("Evolução e composição")
-    c1, c2 = st.columns(2, gap="large")
-    with c1:
-        grafico_evolucao(uf, nacional, medida)
-    with c2:
-        grafico_composicao(uf, base, medida)
+    with secao("Evolução e composição"):
+        c1, c2 = st.columns(2, gap="large")
+        with c1:
+            grafico_evolucao(uf, nacional, medida)
+        with c2:
+            grafico_composicao(uf, base, medida)
 
-    secao("Posição e crescimento" + (" · variação ignora o filtro de ano" if ano != "Todos" else ""))
-    c1, c2 = st.columns(2, gap="large")
-    with c1:
-        grafico_posicao(uf, por_uf, medida, posicao)
-    with c2:
-        grafico_variacao_areas(uf, nacional_anos, medida)
+    with secao("Posição e crescimento" + (" · variação ignora o filtro de ano" if ano != "Todos" else "")):
+        c1, c2 = st.columns(2, gap="large")
+        with c1:
+            grafico_posicao(uf, por_uf, medida, posicao)
+        with c2:
+            grafico_variacao_areas(uf, nacional_anos, medida)
 
-    secao("Detalhes sob demanda")
-    tabela_uf(uf, nacional, medida)
+    with secao("Detalhes sob demanda"):
+        tabela_uf(uf, nacional, medida)

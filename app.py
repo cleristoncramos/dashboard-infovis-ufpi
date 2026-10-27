@@ -18,27 +18,37 @@ st.markdown("""
 <style>
 :root {
     --tinta: #1F2933; --tinta-2: #52606D; --primaria: #0072B2;
-    --linha: #E4E7EB; --superficie: #F5F7FA;
+    --linha: #E4E7EB; --superficie: #F5F7FA; --borda-secao: #6B7682;
+}
+/* Cantos retos em todo o sistema (exceto indicadores de carregamento) */
+.stApp *:not([data-testid="stSpinner"] *):not([data-testid="stStatusWidget"] *) { border-radius: 0 !important; }
+
+/* Seções: borda fina cinza-escura e discreta delimitando título e conteúdo */
+div[class*="st-key-secao_"] {
+    border: 1px solid var(--borda-secao) !important; padding: 1.1rem 1.4rem 1.3rem; margin-top: 0.9rem;
+    background: #FFFFFF;
 }
 .block-container { padding-top: 2.2rem; max-width: 1400px; }
 h1, h2, h3 { color: var(--tinta); letter-spacing: -0.01em; }
 
 div[data-testid="stMetric"] {
-    background: #FFFFFF; border: 1px solid var(--linha); border-radius: 12px;
+    background: #FFFFFF; border: 1px solid var(--linha);
     padding: 14px 18px; min-height: 150px;
 }
 div[data-testid="stMetricValue"] { font-size: 1.6rem; }
-div[data-testid="stMetricValue"] > div, div[data-testid="stMetricLabel"] p { white-space: normal; overflow: visible; }
-div[data-testid="stMetricLabel"] p { font-size: 0.85rem; color: var(--tinta-2); text-transform: uppercase; letter-spacing: .04em; }
+div[data-testid="stMetricValue"] > div, [data-testid="stMetricLabel"] *, [data-testid="stMetric"] [data-testid="stCaptionContainer"], [data-testid="stMetric"] [data-testid="stCaptionContainer"] * {
+    white-space: normal !important; overflow: visible !important; text-overflow: clip !important;
+}
+[data-testid="stMetricLabel"] p { font-size: 0.9rem; color: var(--tinta-2); }
 
 .titulo-grafico { font-size: 1.08rem; font-weight: 600; color: var(--tinta); margin-bottom: 0.15rem; }
 .insight { font-size: 0.92rem; color: var(--tinta-2); line-height: 1.45; margin-bottom: 0.3rem; }
 .insight b { color: var(--tinta); }
-.resumo { background: var(--superficie); border-left: 3px solid var(--primaria); border-radius: 6px;
-          padding: 12px 16px; color: var(--tinta-2); margin: 0.6rem 0 0.4rem; }
+.resumo { background: var(--superficie); border-left: 3px solid var(--primaria);
+          padding: 12px 16px; color: var(--tinta-2); margin: 0.8rem 0 0.2rem; }
 .resumo b { color: var(--tinta); }
 .secao { font-size: 0.78rem; font-weight: 700; color: var(--primaria); text-transform: uppercase;
-         letter-spacing: .08em; margin: 1.6rem 0 0.4rem; border-top: 1px solid var(--linha); padding-top: 1rem; }
+         letter-spacing: .08em; margin: 0 0 0.2rem; }
 .rotulo-lateral { font-size: 0.72rem; font-weight: 700; color: var(--tinta-2); text-transform: uppercase;
                   letter-spacing: .08em; margin: 0.4rem 0 0.2rem; }
 
@@ -50,7 +60,7 @@ div[data-testid="stMetricLabel"] p { font-size: 0.85rem; color: var(--tinta-2); 
 
 /* ---------- Página inicial ---------- */
 .hero {
-    position: relative; overflow: hidden; border-radius: 18px; padding: 56px 48px 48px;
+    position: relative; overflow: hidden; padding: 56px 48px 48px;
     background: linear-gradient(120deg, #0B3C5D 0%, #0072B2 55%, #3E9BD3 100%); color: #fff;
 }
 .hero h1 { color: #fff; font-size: 2.6rem; line-height: 1.12; margin: 0 0 14px; max-width: 760px; }
@@ -65,8 +75,8 @@ div[data-testid="stMetricLabel"] p { font-size: 0.85rem; color: var(--tinta-2); 
 @media (max-width: 1100px) { .hero svg { display: none; } }
 @media (max-width: 900px) { .hero { padding: 36px 24px; } .hero h1 { font-size: 1.9rem; } }
 
-.passo { border: 1px solid var(--linha); border-radius: 14px; padding: 22px; background: #fff; height: 100%; }
-.passo .num { width: 34px; height: 34px; border-radius: 50%; background: var(--primaria); color: #fff;
+.passo { border: 1px solid var(--linha); padding: 22px; background: #fff; height: 100%; }
+.passo .num { width: 34px; height: 34px; background: var(--primaria); color: #fff;
               display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 12px; }
 .passo h4 { margin: 0 0 6px; font-size: 1.05rem; color: var(--tinta); }
 .passo p { margin: 0; color: var(--tinta-2); font-size: .95rem; }
@@ -76,9 +86,9 @@ div[data-testid="stMetricLabel"] p { font-size: 0.85rem; color: var(--tinta-2); 
 .recurso p { margin: 0; color: var(--tinta-2); font-size: .93rem; }
 
 .amostra { display: inline-flex; align-items: center; gap: 8px; margin: 0 18px 8px 0; font-size: .92rem; }
-.amostra i { width: 18px; height: 18px; border-radius: 4px; display: inline-block; }
+.amostra i { width: 18px; height: 18px; display: inline-block; }
 
-.st-key-btn_comecar button { padding: 0.75rem 2.2rem; font-size: 1.15rem; font-weight: 600; border-radius: 10px; }
+.st-key-btn_comecar button { padding: 0.75rem 2.2rem; font-size: 1.15rem; font-weight: 600; }
 </style>
 """, unsafe_allow_html=True)
 
